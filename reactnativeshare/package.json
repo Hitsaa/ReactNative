@@ -1,5 +1,5 @@
 {
-  "name": "barcodescanner",
+  "name": "reactnativeshare",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,13 +10,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "react": "16.9.0",
     "react-native": "0.61.5",
-    "react-native-camera-kit": "^8.0.4",
-    "react-native-elements": "^1.2.7",
-    "react-native-share": "^2.0.0",
-    "react-native-vector-icons": "^6.6.0",
-    "react-social-icons": "^4.1.0"
+    "react-native-social-share": "^1.6.5"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
