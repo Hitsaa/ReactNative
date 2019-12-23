@@ -1,4 +1,7 @@
-import React from 'react';
+import {
+React,
+Component
+} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,7 +9,7 @@ import {
   Button
 } from 'react-native';
 
-export default class Home extends React.Component {
+export default class Home extends Component {
   render() {
     return(
       <View style = {styles.container}>
@@ -21,15 +24,6 @@ export default class Home extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 const styles = StyleSheet.create({
   container: {
