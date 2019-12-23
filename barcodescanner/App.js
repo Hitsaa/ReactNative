@@ -1,7 +1,7 @@
 //This is an example code to Scan QR code//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet} from 'react-native';
+import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet, Share} from 'react-native';
 // import all basic components
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 import { SocialIcon } from 'react-native-elements';
@@ -59,6 +59,9 @@ export default class App extends Component {
       that.setState({ opneScanner: true });
     }    
   }
+  shareMessage() {
+    Share.share({message: this.state.qrvalue}).then(this.onBarcodeScan);
+  }
   render() {
     let displayModal;
     //If qrvalue is set then return this view
@@ -83,28 +86,14 @@ export default class App extends Component {
                 </Text>
             </TouchableHighlight>
 
-            <View style={{flexDirection:'column',padding:20}}>
-          {/*<View style = {{flexDirection: 'column'}}>*/}
-            <View style={{flexDirection:'column'}}>
-              <SocialIcon
-              type='google-plus-official'
-              onPress={() => {
-                alert('Google');
-              }}
-              />
-              <Text style={{textAlign:'center'}}>Google</Text>              
-            </View>
-            <View style={{flexDirection: 'column'}}>
-              <SocialIcon type="instagram"
-              onPress={()=> {
-                alert('Instagram');
-              }}
-              />
-              <Text style={{ textAlign: 'center'}}>
-                Instagram
+            <TouchableHighlight
+            onPress={()=> this.shareMessage()}
+            style={styles.button}>
+              <Text style={{ color: '#FFFFFF',  fontSize: 12}}>
+                Share
               </Text>
-            </View>
-          </View>
+            </TouchableHighlight>
+
         </View>
         //</View>
       );
