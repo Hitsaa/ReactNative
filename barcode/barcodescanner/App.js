@@ -61,7 +61,6 @@ export default class App extends Component {
   }
 
   render() {
-    let displayModal;
     //If qrvalue is set then return this view
     if (!this.state.openScanner) {
       return (
@@ -97,7 +96,7 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1 }}>
         <CameraKitCameraScreen
-          showFrame={false}
+          showFrame={true}
           //Show/hide scan frame
           scanBarcode={true}
           //Can restrict for the QR Code only

@@ -108,7 +108,6 @@ export default class App extends React.Component {
     }
   }
   render() {
-    if (this.state.isPermitted) {
       return (
         <CameraKitCameraScreen
           // Buttons to perform action done and cancel
@@ -124,17 +123,6 @@ export default class App extends React.Component {
           captureButtonImage={require('./assets/capture.png')}
         />
       );
-    } else {
-      return (
-        <View style={styles.container}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={this.onPress.bind(this)}>
-            <Text>Open Camera</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    }
   }
 }
 const styles = StyleSheet.create({
