@@ -1,10 +1,17 @@
 //This is an example code to Scan QR code//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet, Share} from 'react-native';
+import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet, Share,
+        Image,Dimensions,Platform} from 'react-native';
 // import all basic components
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 //import CameraKitCameraScreen we are going to use.
+
+import {Icon}from 'react-native-elements';
+import {createAppContainer} from 'react-navigation';
+import {createDrawerNavigator} from 'react-navigation-drawer';
+import {createStackNavigator} from 'react-navigation-stack';
+
 export default class App extends Component {
   constructor() {
     super();
@@ -32,8 +39,8 @@ export default class App extends Component {
         try {
           const granted = await PermissionsAndroid.request(
             PermissionsAndroid.PERMISSIONS.CAMERA,{
-              'title': 'CameraExample App Camera Permission',
-              'message': 'CameraExample App needs access to your camera '
+              'title': 'Barcode App Camera Permission',
+              'message': 'Barcode App needs access to your camera ',
             }
           )
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -67,14 +74,20 @@ export default class App extends Component {
         <View style={styles.container}>
             {/*<Text style={styles.heading}>React Native QR Code Example</Text> */}
             <Text style={styles.simpleText}>{this.state.qrvalue ? 'Scanned QR Code: '+this.state.qrvalue : ''}</Text>
+            
             {this.state.qrvalue.includes("http") ? 
+            
               <TouchableHighlight
                 onPress={() => this.onOpenlink()}
                 style={styles.button}>
                   <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Open Link</Text>
               </TouchableHighlight>
-              : null
+              
+              : <View>
+                {this.onopenScanner()}
+                </View>
             }
+            
             <TouchableHighlight
               onPress={() => this.onopenScanner()}
               style={styles.button}>
@@ -93,6 +106,7 @@ export default class App extends Component {
         </View>
       );
     }
+
     return (
       <View style={{ flex: 1 }}>
         <CameraKitCameraScreen
@@ -109,7 +123,9 @@ export default class App extends Component {
           onReadCode={event =>
             this.onBarcodeScan(event.nativeEvent.codeStringValue)
           }
+          
         />
+        
       </View>
     );
   }
