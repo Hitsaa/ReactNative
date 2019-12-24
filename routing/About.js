@@ -6,11 +6,12 @@ const About=() => {
     const goToHome = () => {
         Actions.home()
     }
-    const pop=() => {
+    const toPop=() => {
         Actions.pop()
     }
+    }
     return(
-        <TouchableOpacity style = {{margin: 128}} onPress={pop}>
+        <TouchableOpacity style = {{margin: 128}} onPress={toPop}>
             <Text>
                 This is About
             </Text>
