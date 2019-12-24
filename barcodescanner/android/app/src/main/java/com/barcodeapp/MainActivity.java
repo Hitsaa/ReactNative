@@ -1,4 +1,4 @@
-package com.barcodescanner;
+package com.barcodeapp;
 
 import com.facebook.react.ReactActivity;
 

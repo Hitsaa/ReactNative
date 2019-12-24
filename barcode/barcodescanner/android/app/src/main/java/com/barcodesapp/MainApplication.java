@@ -1,4 +1,4 @@
-package com.barcodescanner;
+package com.barcodeapp;
 
 import android.app.Application;
 import android.content.Context;
