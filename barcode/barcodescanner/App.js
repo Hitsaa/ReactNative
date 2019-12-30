@@ -1,161 +1,161 @@
-//This is an example code to Scan QR code//
+//This is an example code for Navigation Drawer with Custom Side bar//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet, Share,
-        Image,Dimensions,Platform} from 'react-native';
+import {
+  View,
+  Dimensions,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 // import all basic components
-import { CameraKitCameraScreen, } from 'react-native-camera-kit';
-//import CameraKitCameraScreen we are going to use.
-
-import {Icon}from 'react-native-elements';
+ 
+//For React Navigation 3+
+//import {
+//  createStackNavigator,
+//  createDrawerNavigator,
+//  createAppContainer,
+//} from 'react-navigation';
+ 
+//For React Navigation 4+
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
+ 
+//Import all the screens
+import ScanApp from './pages/ScanScreen';
+//import Screen2 from './pages/Screen2';
+//import Screen3 from './pages/Screen3';
+import Screen4 from './pages/Screen4';
+ 
+//Import Custom Sidebar
+import CustomSidebarMenu from './CustomSidebarMenu';
+global.currentScreenIndex = 0;
 
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      //variable to hold the qr value
-      qrvalue: '',
-      openScanner: false,
-    };
-  }
-  onOpenlink() {
-    //Function to open URL, If scanned 
-    Linking.openURL(this.state.qrvalue);
-    //Linking used to open the URL in any browser that you have installed
-  }
-  onBarcodeScan(qrvalue) {
-    //called after te successful scanning of QRCode/Barcode
-    this.setState({ qrvalue: qrvalue });
-    this.setState({ openScanner: false });
-  }
-  onopenScanner() {
-    var that =this;
-    //To Start Scanning
-    if(Platform.OS == 'android'){
-      async function requestCameraPermission() {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.CAMERA,{
-              'title': 'Barcode App Camera Permission',
-              'message': 'Barcode App needs access to your camera ',
-            }
-          )
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            //If CAMERA Permission is granted
-            that.setState({ qrvalue: '' });
-            that.setState({ openScanner: true });
-          } else {
-            alert("CAMERA permission denied");
-          }
-        } catch (err) {
-          alert("Camera permission err",err);
-          console.warn(err);
-        }
-      }
-      //Calling the camera permission function
-      requestCameraPermission();
-    }else{
-      that.setState({ qrvalue: '' });
-      that.setState({ openScanner: true });
-    }    
-  }
-
-  shareMessage() {
-    Share.share({message: this.state.qrvalue}).then(this.onBarcodeScan);
-  }
-
+//Navigation Drawer Structure for all screen
+class NavigationDrawerStructure extends Component {
+  //Top Navigation Header with Donute Button
+  toggleDrawer = () => {
+    //Props to open/close the drawer
+    this.props.navigationProps.toggleDrawer();
+  };
   render() {
-    //If qrvalue is set then return this view
-    if (!this.state.openScanner) {
-      return (
-        <View style={styles.container}>
-            {/*<Text style={styles.heading}>React Native QR Code Example</Text> */}
-            <Text style={styles.simpleText}>{this.state.qrvalue ? 'Scanned QR Code: '+this.state.qrvalue : ''}</Text>
-            
-            {this.state.qrvalue.includes("http") ? 
-            
-              <TouchableHighlight
-                onPress={() => this.onOpenlink()}
-                style={styles.button}>
-                  <Text style={{ color: '#FFFFFF', fontSize: 12 }}>Open Link</Text>
-              </TouchableHighlight>
-              
-              : <View>
-                {this.onopenScanner()}
-                </View>
-            }
-            
-            <TouchableHighlight
-              onPress={() => this.onopenScanner()}
-              style={styles.button}>
-                <Text style={{ color: '#FFFFFF', fontSize: 12 }}>
-                Open QR Scanner
-                </Text>
-            </TouchableHighlight>
-
-            <TouchableHighlight
-            onPress={()=> this.shareMessage()}
-            style={styles.button}>
-              <Text style={{ color: '#FFFFFF',  fontSize: 12}}>
-                Share
-              </Text>
-            </TouchableHighlight>
-        </View>
-      );
-    }
-
     return (
-      <View style={{ flex: 1 }}>
-        <CameraKitCameraScreen
-          showFrame={true}
-          //Show/hide scan frame
-          scanBarcode={true}
-          //Can restrict for the QR Code only
-          laserColor={'blue'}
-          //Color can be of your choice
-          frameColor={'yellow'}
-          //If frame is visible then frame color
-          colorForScannerFrame={'black'}
-          //Scanner Frame color
-          onReadCode={event =>
-            this.onBarcodeScan(event.nativeEvent.codeStringValue)
-          }
-          
-        />
-        
+      <View style={{ flexDirection: 'row' }}>
+        <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
+          {/*Donute Button Image */}
+          <Image
+            source={require('./image/drawer.png')}
+            style={{ width: 35, height: 35, marginLeft: 5 }}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor:'white'
+ 
+//Stack Navigator for the First Option of Navigation Drawer
+const FirstActivity_StackNavigator = createStackNavigator({
+  //All the screen from the First Option will be indexed here
+  First: {
+    screen: ScanApp,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Scan',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: 'light-content',
+      },
+      headerTintColor: '#ffffff',
+      headerTransparent: true,
+    }),
   },
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#2c3539',
-    padding: 10,
-    width:300,
-    marginTop:16
-  },
-  heading: { 
-    color: 'black', 
-    fontSize: 24, 
-    alignSelf: 'center', 
-    padding: 10, 
-    marginTop: 30 
-  },
-  simpleText: { 
-    color: 'black', 
-    fontSize: 20, 
-    alignSelf: 'center', 
-    padding: 10, 
-    marginTop: 16
-  }
 });
+ 
+//Stack Navigator for the Second Option of Navigation Drawer
+/*
+const Screen2_StackNavigator = createStackNavigator({
+  //All the screen from the Second Option will be indexed here
+  Second: {
+    screen: Screen2,
+    navigationOptions: ({ navigation }) => ({
+      title: 'History',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#FF9800',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+ 
+//Stack Navigator for the Third Option of Navigation Drawer
+const Screen3_StackNavigator = createStackNavigator({
+  //All the screen from the Third Option will be indexed here
+  Third: {
+    screen: Screen3,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Settings',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      headerStyle: {
+        backgroundColor: '#FF9800',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+*/
+const Screen4_StackNavigator = createStackNavigator({
+  //All the screen from the Second Option will be indexed here
+  Fourth: {
+    screen: Screen4,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Share',
+      headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+ 
+      headerStyle: {
+        backgroundColor: '#FF9800',
+      },
+      headerTintColor: '#fff',
+    }),
+  },
+});
+
+//Drawer Navigator Which will provide the structure of our App
+const DrawerNavigatorExample = createDrawerNavigator(
+  {
+    //Drawer Optons and indexing
+    NavScreen_ScanApp: {
+      screen: FirstActivity_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Scan',
+      },
+    },
+/*    
+    NavScreen2: {
+      screen: Screen2_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'History',
+      },
+    },
+    NavScreen3: {
+      screen: Screen3_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Settings',
+      },
+    },
+*/
+    NavScreen4: {
+      screen: Screen4_StackNavigator,
+      navigationOptions: {
+        drawerLabel: 'Share',
+      },
+    },
+  },
+  {
+    //For the Custom sidebar menu we have to provide our CustomSidebarMenu
+    contentComponent: CustomSidebarMenu,
+    //Sidebar width
+    drawerWidth: Dimensions.get('window').width - 130,
+  }
+);
+export default createAppContainer(DrawerNavigatorExample);
