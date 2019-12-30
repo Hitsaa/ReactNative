@@ -1,16 +1,17 @@
 //This is an example code to Scan QR code//
 import React, { Component } from 'react';
 //import react in our code.
-import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, Platform, StyleSheet, Share,
-        Image,Dimensions,Platform} from 'react-native';
+import { Text, View, Linking, TouchableHighlight, PermissionsAndroid, StyleSheet, Share,
+  Platform} from 'react-native';
 // import all basic components
 import { CameraKitCameraScreen, } from 'react-native-camera-kit';
 //import CameraKitCameraScreen we are going to use.
-
+/*
 import {Icon}from 'react-native-elements';
 import {createAppContainer} from 'react-navigation';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
+*/
 
 export default class App extends Component {
   constructor() {
