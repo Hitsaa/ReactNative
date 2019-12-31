@@ -12,6 +12,7 @@ import {
 import { SocialIcon } from 'react-native-elements';
 import colors from "../style/color";
 import RoundedButton from "../components/buttons/RoundedButton";
+
 export default class LoggedOut extends Component {
 onOpenlink() {
     Linking.openURL("https://www.facebook.com");

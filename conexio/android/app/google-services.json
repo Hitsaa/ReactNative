@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "940082360518",
+    "firebase_url": "https://newconexioapp.firebaseio.com",
+    "project_id": "newconexioapp",
+    "storage_bucket": "newconexioapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940082360518:android:7af89545562d29bbca67c7",
+        "android_client_info": {
+          "package_name": "com.conexio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940082360518-a2lb60ot0da2m8al401p9su43u3pg3a5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.conexio",
+            "certificate_hash": "9ffe888b25d9100a446c5abb425c9e60efacbe30"
+          }
+        },
+        {
+          "client_id": "940082360518-5tai5ui5eanvoci9uu8ql00k74kv103g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBknPHGhkffuCxO3c-qrN8PpTQaoR_u-Ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940082360518-5tai5ui5eanvoci9uu8ql00k74kv103g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
