@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.loginscreen"
+        applicationId "com.conexio"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -197,13 +197,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-project.ext.vectoricons = [
-iconFontNames: [
-'FontAwesome.ttf',
-'FontAwesome5.ttf',
-''
-] // Name of the font files you want to copy
-]
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
