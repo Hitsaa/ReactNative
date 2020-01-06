@@ -186,8 +186,10 @@ const ScreenSwitching = createStackNavigator({
           userLogin: { 
             screen: Login,            
             navigationOptions: {    
-              //headerShown: false,              
-              headerBackImage:false              
+              //headerShown: false,
+              title:'',
+              headerTransparent:true,
+              headerTintColor:'slateblue'              
             } 
           },  
     },
