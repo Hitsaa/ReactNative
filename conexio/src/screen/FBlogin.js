@@ -19,7 +19,8 @@ export default class FBLoginButton extends Component {
               }
             }
           }
-          onLogoutFinished={() => alert("User logged out")}/>
+          onLogoutFinished={() => alert("User logged out")}
+          />
       </View>
     );
   }

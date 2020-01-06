@@ -8,54 +8,83 @@ import {
     ScrollView,
     ImageBackground,
     Linking,
+    Button,
 }from 'react-native';
 import { SocialIcon } from 'react-native-elements';
-import colors from "../style/color";
-import RoundedButton from "../components/buttons/RoundedButton";
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default class LoggedOut extends Component {
+import FacebookLogin from '../screen/Facebook';
+import colors from "../style/color";
+//import RoundedButton from "../components/buttons/RoundedButton";
+import InstagramLogging from '../screen/Instagram.js';
+import Googl from "../screen/Google.js";
+import Login from "../screen/Login.js";
+
+class LoggedOut extends Component {
 onOpenlink() {
     Linking.openURL("https://www.facebook.com");
 }
     render() {
+        const { navigate } = this.props.navigation
         return (
             <ImageBackground 
-            source={require("../images/football1.jpg")}
+            source={require("../images/Background.png")}
             style={styles.BgImage}
             imageStyle={{resizeMode: 'stretch'}}>                
                 <View style={styles.wrapper}>
                     <View style={styles.welcomeWrapper}>
                         <Image 
                             style={styles.logo}
-                            source={require("../images/mylogo.png")}>                    
+                            source={require("../images/logo.png")}>                    
                         </Image>                
                         <Text
                             style={styles.welcomeText}>
                             connect with sports professional.
                         </Text>
-                        <RoundedButton
-                            text="Sign up with Email"
-                            textColor={colors.green01}
-                            backgroundColor={colors.white}                            
-                        />
-                        <RoundedButton text="Sign up as Scout" textColor={colors.white} />
-                        <View style={[styles.iconstyle,{paddingBottom:15}]}>
+                        
+                        <TouchableHighlight 
+                        onPress={() => navigate('userLogin')}
+                        style={styles.buttonDesign}>                            
+                            <Text style={styles.buttonText}>
+                                Sign up with Email           
+                            </Text>                                    
+                        </TouchableHighlight>
+
+                        <TouchableHighlight 
+                        onPress={() => navigate('userLogin')}
+                        style={styles.buttonDesign}>                            
+                            <Text style={styles.buttonText}>
+                                Sign up as Scout           
+                            </Text>                                    
+                        </TouchableHighlight>
+
+                        {/*<RoundedButton text="Sign up as Scout"                        
+                        />*/}
+
+                        <View style={[styles.iconstyle,{paddingBottom:50}]}>
                         <SocialIcon
                         type="facebook"                        
-                        onPress={() => {this.onOpenlink()}}
+                        onPress={() => navigate('FacebookLogin')}
                         />
                         <SocialIcon
                         type="google"
-                        onPress={() => {this.onOpenlink()}}
+                        onPress={() => navigate('GoogleLogin')}                        
                         />
                         <SocialIcon
                         type="instagram"
-                        onPress={() => {this.onOpenlink()}}
-                        />
+                        onPress={() => navigate('IGLogin')}
+                        />                                                
                         </View>
-                        <RoundedButton text="I already have an account" textColor={colors.white} />
-                    </View>
-                </View>
+                        <View style = {styles.lineStyle}/>
+                        <Text                            
+                            onPress={() => navigate('userLogin')}
+                            style={{color:"white", marginTop:20}}
+                        >                            
+                                I already have an account
+                            </Text>                                                         
+                    </View>                    
+                </View>                
             </ImageBackground>
 );
 }}
@@ -65,33 +94,105 @@ const styles = StyleSheet.create({
         flex:1,
         //backgroundColor: colors.green01,
         //justifyContent:'center',
-        alignItems:'center',
+        //alignItems:'center',
+        //flexDirection:'column'
     },
     welcomeWrapper:{
         marginTop:30,
         padding:20,
-        alignItems:'center',
+        alignItems:'center',        
     },
     logo:{
-        width:100,
-        height:50,
-        marginTop:50,
-        marginBottom:20,        
+        width:200,
+        height:200,
+        //marginTop:10,
+        //marginBottom:0,
+        resizeMode:"contain"     
     },
     BgImage:{
-        width:null,
-        height:null,
-        flex:1,        
+        width:'100%',
+        height:'100%',
+        flex:1,
+        
     },
     welcomeText:{
         fontSize:18,
-        color:'yellow',
+        color:'white',
         textAlign:'left',
         marginBottom:200
     },
     iconstyle:{
         //flex:1,
         flexDirection:'row',        
-        marginBottom:100,
-    }
+        //marginBottom:100,
+    },
+    lineStyle:{
+        //flex:1,
+        flexDirection:'column',
+        //display:"flex",
+        borderWidth: 0.5,
+        width:'100%',
+        borderColor:'grey',
+        //alignSelf:'stretch'
+        //margin:10,
+   },
+   buttonDesign:{
+    padding:15,
+    //flex:1,
+    flexDirection:'row',
+    //display:"flex",
+    borderRadius:40,
+    borderWidth:1,
+    borderColor:colors.white,
+    marginBottom:15,
+    alignItems:'center',
+   },
+   buttonText:{
+    fontSize:16,
+    width:"100%",
+    textAlign:'center',
+    color:colors.white
+   }
 })
+
+const ScreenSwitching = createStackNavigator({
+    //Constant which holds all the screens like index of any book 
+      LoggedOut: { 
+          screen: LoggedOut,
+          navigationOptions: {    
+            headerShown: false,        
+          }
+        
+     }, 
+      //First entry by default be our first screen if we do not define initialRouteName
+      FacebookLogin: { 
+          screen: FacebookLogin,
+          navigationOptions: {    
+            headerShown: false,        
+          } 
+        },
+        IGLogin: { 
+            screen: InstagramLogging,
+            navigationOptions: {    
+              headerShown: false,        
+            } 
+          },
+          GoogleLogin: { 
+            screen: Googl,
+            navigationOptions: {    
+              headerShown: false,        
+            } 
+          },
+          userLogin: { 
+            screen: Login,            
+            navigationOptions: {    
+              //headerShown: false,              
+              headerBackImage:false              
+            } 
+          },  
+    },
+    {
+      //initialRouteName: 'LoggedOut',
+    }
+  );
+  export default createAppContainer(ScreenSwitching);

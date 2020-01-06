@@ -1,4 +1,4 @@
-/*
+
 import React, {Component} from 'react';
 import {
   Platform,
@@ -8,15 +8,19 @@ import {
 }from 'react-native';
 
 import LoggedOut from './src/screen/LoggedOut.js'
+//import Login from './src/screen/Login';
+
 
 export default class App extends Component {
   render() {
     return <LoggedOut/>;
   }
 }
-*/
 
-import React from 'react';
+
+/*
+//instagram sign in
+import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
@@ -85,8 +89,11 @@ const styles = StyleSheet.create({
     width: 300,
     marginTop: 30,
   },
+});
+*/
 
 /*
+//google sign in
 import React from 'react';
 import {
   StyleSheet,
@@ -116,9 +123,10 @@ export default class App extends React.Component {
     //initial configuration
     GoogleSignin.configure({
       //It is mandatory to call this method before attempting to call signIn()
-      scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+      //scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+      scopes: ['https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/drive.metadata', 'https://www.googleapis.com/auth/drive.appdata', 'https://www.googleapis.com/auth/drive.file', 'https://www.googleapis.com/auth/drive.metadata.readonly', 'https://www.googleapis.com/auth/drive.scripts', 'https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/drive.photos.readonly'],
       // Repleace with your webClientId generated from Firebase console
-      webClientId: '940082360518-5tai5ui5eanvoci9uu8ql00k74kv103g.apps.googleusercontent.com',
+      webClientId: '464472978423-1r5i6kpcguen0rf39cmu8phml4ju99r4.apps.googleusercontent.com',
     });
     //Check if user is already signed in
     this._isSignedIn();
@@ -254,4 +262,55 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
 });
+*/
+
+/*
+import React, { Component } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import InstagramLogin from './src/screen/InstaLogin';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: ''
+    };
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity
+          style={{
+            borderRadius: 5,
+            backgroundColor: 'orange',
+            height: 30, width: 100,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          onPress={() => this.instagramLogin.show()}>
+          <Text style={{ color: 'white', textAlign: 'center' }}>Login now</Text>
+        </TouchableOpacity>
+        <Text style={{ margin: 10 }}>Token: {this.state.token}</Text>
+        {this.state.failure && <View>
+          <Text style={{ margin: 10 }}>failure: {JSON.stringify(this.state.failure)}</Text>
+        </View>}
+        <InstagramLogin
+          ref={ref => (this.instagramLogin = ref)}
+          clientId="931cca1d0c154de3aafd83300ff8b288"
+          redirectUrl="https://google.com"
+          scopes={['user_profile', 'user_media']}
+          onLoginSuccess={token => this.setState({ token })}
+          onLoginFailure={data => this.setState({ failure: data })}
+        />        
+      </View>
+    );
+  }
+}
+
+export default App;
 */

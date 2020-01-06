@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import colors from '../../style/color';
 export default class RoundedButton extends Component{
     render() {
-        const { text, icon,textColor, backgroundColor } = this.props;
+        const { text,textColor, backgroundColor, } = this.props;
     //    const backgroundColor = background || 'transparent'
     //    const color = textColor || color.black
         return(
@@ -27,7 +27,7 @@ export default class RoundedButton extends Component{
 RoundedButton.PropTypes = {
     text: PropTypes.string.isRequired,
     textColor: PropTypes.colors,    //it is not required.
-    backgroundColor: PropTypes.string
+    backgroundColor: PropTypes.string,    
 };
 
 const styles=StyleSheet.create({
@@ -35,7 +35,7 @@ const styles=StyleSheet.create({
         padding:15,
         //flex:1,
         flexDirection:'row',
-        display:"flex",
+        //display:"flex",
         borderRadius:40,
         borderWidth:1,
         borderColor:colors.white,
@@ -46,6 +46,6 @@ const styles=StyleSheet.create({
         fontSize:16,
         width:"100%",
         textAlign:'center',
-        color:colors.green01
-    },    
+        color:colors.white
+    },
 });
