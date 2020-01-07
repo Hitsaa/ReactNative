@@ -20,7 +20,7 @@ class InputField extends Component {
             } = this.props;
             const color = labelColor || colors.white;
             const fontSize = labelTextSize || 14;
-            const inputColor = textColor || colors.white;
+            const inputColor = textColor || colors.black;
             const borderBottom = borderBottomColor || "transparent";
         return(
             <View style={[customStyle,styles.wrapper]}>
@@ -46,9 +46,12 @@ const styles = StyleSheet.create({
     },
     label: { fontWeight: "700", marginBottom: 10 },
     inputFiled: {
-      borderBottomWidth: 1,
-      paddingTop: 5,
-      paddingBottom: 5
+      borderWidth: 2,
+      //paddingTop: 5,
+      //paddingBottom: 5,
+      borderRadius:40,
+      borderColor:colors.white,
+      backgroundColor:colors.white,      
     }
   });
   export default InputField;
